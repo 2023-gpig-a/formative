@@ -57,25 +57,31 @@ The datastore will be a PostgreSQL database containing three tables:
 \end{itemize}
 We assume that this should be sufficient for the final product.
 
-% This paper is due in april, I suspect that we will know by then so maybe this will need changing in the future.
+% This paper is due in april, I suspect that we will know by then so maybe this will need changing in the future. 
+% TODO Babar should expand on this
 We aren't currently sure how exactly we will do the plant clustering and id assignment.
 If using k-means clustering we would have to carefully define a value of K for each forest, this wouldn't be ideal as it reduces the genericness of our system.
 We will need to look into clustering techniques that work with variable cluster quantities.
 Our plant classifier module will take a cluster of images and predict whether they belong to the species Japanese knotweed, to do this we will need to gather a large number of images of the plant to use as training data. We assume that this will be possible. % by the submission of this paper we will likely want to change the tense of this
 
-% TODO assumptions/capabilities/primary functions? IDK
+% TODO Maybe marks and ellie can expand on this
 The user interface will be created using react and we will prioritise the functionality over UX/UI design. 
 
+% TODO Maybe Jacob and Jakub can work on this
 Drone simulation will be done using ROS2 and Unreal Engine %TODO Is this correct?
 We assume that the code in the simulation should run on a real robot in a forest, but this will need to be tested and verified as simulation is only an approximation of the real world and there are many factors that we can't account for.
 Because of this we will use dummy data feeds to simulate what the drones would send to the actual system.
 Without significant effort, the images captured in simulation won't be similar to the ones we would capture in real life, therefore, we will create a fake node that can deliver data to our datastore.
 
+% TODO Maybe Babar and CJ can expand on this
 Our large language model communication will be handled as follows: Take the data from our system, format it into a prompt, send that to an LLM, forward response to user interface.
 In the final product this could use a specially trained LLM or a fine-tuned LLM, but for our prototype we will hook into GPT-3.5 using their public API % we might not actually use this LLM, change if necessary. 
 
+% TODO Maybe Laura can expand on this
 We have containerised our prototype so that functionality is split into microservices, these can be worked on independently by each team.
 Each microservice is containerised and the entire project can be ran using docker compose.
+
+% TODO maybe we should talk about our sizing estimations, once Prajj has completed his sizing spreadsheet he could talk about it here?
 
 \section{An overview of the system aspects that the team intends to demonstrate in the group}
 presentation
