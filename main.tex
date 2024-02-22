@@ -49,9 +49,9 @@ The following systems will be prototyped:
 \end{itemize}
 
 \noindent
-The datastore will be a postgres database containing three tables:
+The datastore will be a PostgreSQL database containing three tables:
 \begin{itemize}[noitemsep,topsep=3pt]
-\item Raw image entries containing columns for latitude, longitude, camera pose, and the corresponding image uri,
+\item Raw image entries containing columns for latitude, longitude, camera pose, and the corresponding image URI,
 \item Processed entries containing columns for latitude, longitude, and plant id,
 \item A map from plant id to species.
 \end{itemize}
@@ -72,7 +72,7 @@ Because of this we will use dummy data feeds to simulate what the drones would s
 Without significant effort, the images captured in simulation won't be similar to the ones we would capture in real life, therefore, we will create a fake node that can deliver data to our datastore.
 
 Our large language model communication will be handled as follows: Take the data from our system, format it into a prompt, send that to an LLM, forward response to user interface.
-In the final product this could use a specially trained LLM or a fine-tuned LLM, but for our prototype we will hook into GPT-3.5 using their public api % we might not actually use this LLM, change if necessary. 
+In the final product this could use a specially trained LLM or a fine-tuned LLM, but for our prototype we will hook into GPT-3.5 using their public API % we might not actually use this LLM, change if necessary. 
 
 We have containerised our prototype so that functionality is split into microservices, these can be worked on independently by each team.
 Each microservice is containerised and the entire project can be ran using docker compose.
