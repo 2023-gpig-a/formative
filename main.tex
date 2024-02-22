@@ -1,20 +1,43 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 
+% to make itemizes take less space
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
 \title{GPIG-A Formative}
 \begin{document}
 \maketitle
 
-• An outline of the proposed technical solution
+\section{An outline of the proposed technical solution}
+
+We are concerned with the growth of destructive plants within a forest, these plants can outcompete their neighbours, and reduce biodiversity. 
+We propose a solution that uses drones to monitor and capture image data of a given forest, each image is handed back to a central system where we identify the plants present in the image, and store that along with the latitude and longitude. 
+This system is generic enough to work in any forest, but has the option to train it against specific plants that you are concerned about, such that it can give deeper insights and recommendations.
+We will have a user interface where an operator can:
+\begin{itemize}[noitemsep,topsep=3pt]
+\item See the locations of each drone,
+\item Command the cluster of drones to move to a new location,
+\item See which areas have most recently been scanned,
+\item Chat with a large language model about the data obtained.
+\end{itemize}
 
 
-• A brief description of the system that will be prototyped (including assumptions, capabilities, primary functions)
+The plants within each captured image will be clustered together such that similar looking plants are given the same ID. 
+For each plant species that we are especially concerned with, $p$, we could train a machine learning model $f(s) -> [0,1]$ that maps a series of images belonging to a given id onto the probability that they are of species $p$. 
+This would give us reasonable confidence that our id maps to a given species.
 
-This may be useful, feel free to make any changes to it
-https://drive.google.com/file/d/1rrcCPk6IHH\_r9nnWkSZob\_ErjyV\_0b2X/view?usp=sharing
+By tracking the quantity of each identified plant over time, we can see if any are undergoing exponential growth.
+Using a button on our user interface, this data will get wrapped into a pre-made prompt that can then be sent to a large language model.
+The pre-made prompt would say which plants are growing and where, either the plant id or the predicted plant name, the drone scan history, the location of the forest, and ask for advice on how to handle it.
+The operator can then have a conversation with the large language model where they try to plot the best course of action going forward.
 
 
-• An overview of the system aspects that the team intends to demonstrate in the group 
+\section{A brief description of the system that will be prototyped (including assumptions, capabilities, primary functions)}
+
+
+
+
+\section{An overview of the system aspects that the team intends to demonstrate in the group}
 presentation
     Show that we can move drones
     Show what happens when plants grow destructively
@@ -23,9 +46,9 @@ presentation
     Chatting with the LLM
 
 
-• A summary of progress
+\section{A summary of progress}
 
 
-• A brief risk register
+\section{A brief risk register}
 
 \end{document}
