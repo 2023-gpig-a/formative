@@ -5,6 +5,13 @@
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
 \graphicspath{ {./images/} }
 
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+
 \title{GPIG-A Formative}
 \begin{document}
 \maketitle
@@ -92,12 +99,25 @@ Each microservice is containerised and the entire project can be ran using docke
 % TODO maybe we should talk about our sizing estimations, once Prajj has completed his sizing spreadsheet he could talk about it here?
 
 \section{An overview of the system aspects that the team intends to demonstrate in the group}
-presentation
-    Show that we can coordinate the drones to scan specific areas
-    Show what happens when plants grow destructively
-        Simulation part
-        Data pipeline 
-    Chatting with the LLM
+
+In our presentation to the customer we intend to demonstrate the following aspects of our system:
+\begin{enumerate}[noitemsep,topsep=3pt]
+    \item The coordination of drones to scan specific areas,
+    \item A simulation of how our system responds when it discovers that plants are growing destructively,
+    \item A conversation with our large language model.
+\end{enumerate}
+
+To demonstrate the coordination of our drones we will start at the home page of our user interface where the user is presented with a map. 
+The demonstrator will then select an area on the map and the interface will provide a pop up asking if they want to direct the drones to that location, the demonstrator will accept.
+The user interface will then show the drones travelling to the new area, and we will show a monitoring web page that shows us tracking the new plants we have discovered.
+
+To demonstrate how our system responds when it discovers that plants are growing destructively, we will restart the system and feed it with a testing data set where one species has been growing exponentially, and is outcompeting its fellow plants.
+We will show how the system presents this data to the user and compare it to a situation where the plants do not grow destructively.
+This will also demonstrate how we test our system.
+
+To demonstrate a conversation with our large language model we will feed our system the same destructive species test data set but this time the demonstrator will select the button that allows them to have a conversation with a large language model about the results.
+We do not plan on implementing the large language model for the prototype, so this will be done by having a pre-generated script.
+
 
 
 \section{A summary of progress}
@@ -106,7 +126,19 @@ presentation
 
 \section{A brief risk register}
 
-% TODO import from gdrive or make a new one
-%Chttps://docs.google.com/document/d/118jg7LwiYVXQmANl-qmUPp1iQ2_lbnW4YSJ4lxWL0pY/edit
+%https://docs.google.com/document/d/118jg7LwiYVXQmANl-qmUPp1iQ2_lbnW4YSJ4lxWL0pY/edit
+\begin{longtable}{p{0.2\textwidth}p{0.1\textwidth}p{0.1\textwidth}p{0.4\textwidth}}
+    \toprule
+    Risk & Likelihood & Effect & Mitigation and Contingency \\ \midrule
+    \hline \\
+    Team member unavailable for meetings                      & Medium     & Low    & We will host the meeting when the maximum number of team members are available and provide minutes for those who cannot make it.                                                             \\
+    Team member unable to complete work                       & Low        & Medium & Deliverables of the projects are assigned to at least two members. We will have stand up meetings to update the team on progress.                                                           \\
+    Loss of report                                            & Low        & High   & The report is done in Latex, we will have store this in GitHub and use version control so that we can roll back any mistakes.                                                               \\
+    Loss of code                                              & Low        & High   & The code is stored in GitHub, we will use version control so that we can roll back any mistakes.                                                                                            \\
+    Team member misunderstands their task                     & Medium     & Medium & We will collaborate when defining what tasks need completing, this means that every member should be aware of what is needed. Having two people per task should also make this less likely. \\
+    Team member unavailable for a significant period of time. & Low        & High   & We will reassign tasks to other team members as necessary/based on task importance. We will also inform the module staff about the situation. \\ \bottomrule
+    \caption{Risk Register}
+    \label{tab:RiskRegister}
+\end{longtable}
 
 \end{document}
