@@ -38,7 +38,7 @@ This would allow us reasonable confidence that our plant id maps to a given spec
 We can then use this to make more informed recommendations.
 
 Using a button on our user interface, this data will get wrapped into a pre-made prompt that can then be sent to a large language model.
-The pre-made prompt would say where and how plants are growing, the drone scan history, the location of the forest, and if available, the predicted plant name, it would then ask for advice on how to handle it.
+The pre-made prompt would say which plants are growing and where, the drone scan history, the location of the forest, and the predicted plant name (if we have it), and would ask for advice on how to handle it.
 The operator can have a conversation with the large language model where they try to plot the best course of action going forward.
 
 \section{A brief description of the system that will be prototyped (including assumptions, capabilities, primary functions)}
@@ -93,7 +93,7 @@ In the final product this could use a specially trained LLM or a fine-tuned LLM,
 
 % TODO Maybe Laura can expand on this
 We have containerised our prototype so that functionality is split into microservices, these can be worked on independently by each team.
-Each microservice is containerised and the entire project can be ran using docker compose.
+Each microservice is containerised and the entire project can be run using docker compose.
 
 % TODO maybe we should talk about our sizing estimations, once Prajj has completed his sizing spreadsheet he could talk about it here?
 
