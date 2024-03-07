@@ -25,15 +25,15 @@ This system is generic enough to work in any forest, but has the option to train
 Our user interface allows an operator to:
 \begin{itemize}[noitemsep,topsep=3pt]
 \item See the locations of each drone,
-\item Command the cluster of drones to move to a new location,
 \item See which areas have most recently been scanned,
 \item Chat with a large language model about the data obtained.
+\item See the growth of plant species over time
 \end{itemize}
 
 
 The plants within each captured image will be clustered such that similar looking plants are given the same ID. 
 By tracking the quantity of each identified plant over time, we can see if any are undergoing exponential growth.
-For each plant species $s$ that we are especially concerned with, we allow the training of a plant classification module $f(I) -> [0,1]$ mapping a series of images, $I$ belonging to a given id onto the probability that they are of species $s$. 
+For each plant species $s$ that we are especially concerned with, we allow the training of a plant classification module $f(I) \rightarrow [0,1]$ mapping a series of images $I$, belonging to a given id onto the probability that they are of species $s$. 
 This would allow us reasonable confidence that our plant id maps to a given species.
 We can then use this to make more informed recommendations.
 
@@ -45,7 +45,7 @@ The operator can have a conversation with the large language model where they tr
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{block_diagram}
-    \caption{The block diagram of our design. Our system uses a microservice architecture containing our User Interface, Drone Manager, LLM API, DMAS, and Postgres micro services. \\ 
+    \caption{The block diagram of our microservices.  \\ 
     Key: Green = will implement, Red = will mock/simulate}
     \label{fig:design}
 \end{figure}
@@ -63,32 +63,32 @@ As you can see in fig. \ref{fig:design}, the following systems will be present i
 \end{itemize}
 
 \noindent
-The datastore will be a PostgreSQL database containing three tables:
+The datastore will be a PostgreSQL database containing gour tables:
 \begin{itemize}[noitemsep,topsep=3pt]
 \item Raw image entries containing columns for latitude, longitude, camera pose, and the corresponding image URI,
 \item Processed entries containing columns for latitude, longitude, and plant id,
-\item A map from plant id to species. 
+\item A map from plant id to species, 
+\item Drone location history entries.
 \end{itemize}
-We assume that this should be sufficient for the final product.
+We assume that this is sufficient for the final product.
 
 % This paper is due in april, I suspect that we will know by then so maybe this will need changing in the future. 
 % TODO Babar should expand on this
 We aren't currently sure how exactly we will do the plant clustering and id assignment.
-If using k-means clustering we would have to carefully define a value of K for each forest, this wouldn't be ideal as it reduces the genericness of our system.
+If using k-means clustering we would have to carefully define a value of K for each forest, this wouldn't be ideal as it reduces the adaptability of our system.
 We will need to look into clustering techniques that work with variable cluster quantities.
-We will have an example plant classifier that, given a cluster of images, predict whether they belong to the species Japanese knotweed, to do this we will need to gather a large number of images of the plant to use as training data. We assume that this will be possible. % by the submission of this paper we will likely want to change the tense of this
+We will have an example plant classifier that, given a cluster of images, predict whether they belong to the species Japanese knotweed, to do this we will need to gather a large number of images of the plant to use as training data. 
+We assume that this will be possible. % by the submission of this paper we will likely want to change the tense of this
 
 % TODO Maybe marks and ellie can expand on this
 The user interface will be created using react and we will prioritise the functionality over UX/UI design. 
 
 % TODO Maybe Jacob and Jakub can work on this
-Drone simulation will be done using ROS2 and Unreal Engine %TODO Is this correct?
-We assume that the code in the simulation should run on a real robot in a forest, but this will need to be tested and verified as simulation is only an approximation of the real world and there are many factors that we can't account for.
-Because of this we will use dummy data feeds to simulate what the drones would send to the actual system.
-Without significant effort, the images captured in simulation won't be similar to the ones we would capture in real life, therefore, we will create a fake node that can deliver data to our datastore.
+Drone simulation will be done using ROS2 and Unreal Engine. %TODO Is this correct?
+We assume that the code operating the drones in the simulation will work on real drones in a forest, this will need to be tested as simulation can only approximate the real world, there are many factors that we can't account for.
 
 % TODO Maybe Babar and CJ can expand on this
-Our large language model communication will be handled as follows: Take the data from our system, format it into a prompt, send that to an LLM, forward response to user interface.
+Our large language model communication will be handled as follows: Take the data from our system, format it into a prompt, and forward the response to user interface.
 In the final product this could use a specially trained LLM or a fine-tuned LLM, but for our prototype we will hook into GPT-3.5 using their public API % we might not actually use this LLM, change if necessary. 
 
 % TODO Maybe Laura can expand on this
@@ -101,7 +101,7 @@ Each microservice is containerised and the entire project can be ran using docke
 
 In our presentation to the customer we intend to demonstrate the following aspects of our system:
 \begin{enumerate}[noitemsep,topsep=3pt]
-    \item The coordination of drones to scan specific areas,
+    \item The coordination of drones to scan specific areas, % this might change depending on how much we want to do with drones
     \item A simulation of how our system responds when it discovers that plants are growing destructively,
     \item A conversation with our large language model.
 \end{enumerate}
@@ -116,8 +116,6 @@ This will also demonstrate how we test our system.
 
 To demonstrate a conversation with our large language model we will feed our system the same destructive species test data set but this time the demonstrator will select the button that allows them to have a conversation with a large language model about the results.
 We do not plan on implementing the large language model for the prototype, so this will be done by having a pre-generated script.
-
-
 
 \section{A summary of progress}
 
