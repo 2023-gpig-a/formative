@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 
 % to make itemizes take less space
 \usepackage{enumitem}% http://ctan.org/pkg/enumitem
@@ -31,16 +32,14 @@ Our user interface allows an operator to:
 
 
 The plants within each captured image will be clustered such that similar looking plants are given the same ID. 
-For each plant species that we are especially concerned with, $p$, we allow the training of a plant classification module $f(s) -> [0,1]$ mapping a series of images, $s$ belonging to a given id onto the probability that they are of species $p$. 
+By tracking the quantity of each identified plant over time, we can see if any are undergoing exponential growth.
+For each plant species $s$ that we are especially concerned with, we allow the training of a plant classification module $f(I) -> [0,1]$ mapping a series of images, $I$ belonging to a given id onto the probability that they are of species $s$. 
 This would allow us reasonable confidence that our plant id maps to a given species.
 We can then use this to make more informed recommendations.
 
-By tracking the quantity of each identified plant over time, we can see if any are undergoing exponential growth.
 Using a button on our user interface, this data will get wrapped into a pre-made prompt that can then be sent to a large language model.
-The pre-made prompt would say which plants are growing and where, if we have it, the predicted plant name, the drone scan history, the location of the forest, and would ask for advice on how to handle it.
-The operator can then have a conversation with the large language model where they try to plot the best course of action going forward.
-
-
+The pre-made prompt would say where and how plants are growing, the drone scan history, the location of the forest, and if available, the predicted plant name, it would then ask for advice on how to handle it.
+The operator can have a conversation with the large language model where they try to plot the best course of action going forward.
 
 \section{A brief description of the system that will be prototyped (including assumptions, capabilities, primary functions)}
 
@@ -77,7 +76,7 @@ We assume that this should be sufficient for the final product.
 We aren't currently sure how exactly we will do the plant clustering and id assignment.
 If using k-means clustering we would have to carefully define a value of K for each forest, this wouldn't be ideal as it reduces the genericness of our system.
 We will need to look into clustering techniques that work with variable cluster quantities.
-Our plant classifier module will take a cluster of images and predict whether they belong to the species Japanese knotweed, to do this we will need to gather a large number of images of the plant to use as training data. We assume that this will be possible. % by the submission of this paper we will likely want to change the tense of this
+We will have an example plant classifier that, given a cluster of images, predict whether they belong to the species Japanese knotweed, to do this we will need to gather a large number of images of the plant to use as training data. We assume that this will be possible. % by the submission of this paper we will likely want to change the tense of this
 
 % TODO Maybe marks and ellie can expand on this
 The user interface will be created using react and we will prioritise the functionality over UX/UI design. 
